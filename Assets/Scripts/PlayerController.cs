@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -17,16 +15,14 @@ public class PlayerController : MonoBehaviour
     float previousRotation = 0f; // Track the previous rotation angle
     float totalRotation = 0f; // Track the total rotation
 
-    // Start is called before the first frame update
     void Start()
     {
         myRB2D = GetComponent<Rigidbody2D>();
         surfaceEffector = FindFirstObjectByType<SurfaceEffector2D>();
-        LoadHighScore(); // Load the score when the game starts
-        previousRotation = transform.eulerAngles.z; // Initialize previous rotation
+        LoadHighScore();
+        previousRotation = transform.eulerAngles.z;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (canMove)
@@ -81,7 +77,7 @@ public class PlayerController : MonoBehaviour
         if (Mathf.Abs(totalRotation) >= 360f)
         {
             playerScore += rotationScoreIncrement;
-            totalRotation = 0f; // Reset the rotation counter
+            totalRotation = 0f;
             Debug.Log("Full Rotation! Score: " + playerScore);
         }
     }
@@ -89,7 +85,7 @@ public class PlayerController : MonoBehaviour
     public void DisableControls()
     {
         canMove = false;
-        SaveHighScore(); // Save the highest score when controls are disabled
+        SaveHighScore();
     }
 
     public float GetScore()

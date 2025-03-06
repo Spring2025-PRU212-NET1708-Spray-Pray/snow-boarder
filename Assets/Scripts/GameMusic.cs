@@ -1,10 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GameMusic : MonoBehaviour
 {
-    // Start is called before the first frame update
     void Start()
     {
         GetComponent<AudioSource>().Play();
@@ -14,7 +11,7 @@ public class GameMusic : MonoBehaviour
     {
         GameObject[] objs = GameObject.FindGameObjectsWithTag("Music");
 
-        if(objs.Length > 1)
+        if (objs.Length > 1)
         {
             Destroy(this.gameObject);
         }

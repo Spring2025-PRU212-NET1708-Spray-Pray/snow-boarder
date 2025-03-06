@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -12,12 +10,12 @@ public class CrashDetector : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == "Ground" && !hasCrashed)
+        if (collision.tag == "Ground" && !hasCrashed)
         {
             hasCrashed = true;
             FindFirstObjectByType<PlayerController>().DisableControls();
             crashEffect.Play();
-            GetComponent<AudioSource>().PlayOneShot(painfulDeathSFX[Random.Range(0,8)]);
+            GetComponent<AudioSource>().PlayOneShot(painfulDeathSFX[Random.Range(0, 8)]);
             Invoke("ReloadScene", loadDelay);
         }
     }
