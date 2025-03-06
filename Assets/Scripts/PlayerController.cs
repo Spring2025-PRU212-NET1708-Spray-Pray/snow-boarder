@@ -8,16 +8,18 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float torqueAmount = 4495f;
     [SerializeField] float boostSpeed = 30f;
     [SerializeField] float baseSpeed = 20f;
+    [SerializeField] float scoreIncrement = 1f; // Score increment per second
 
     Rigidbody2D myRB2D;
     SurfaceEffector2D surfaceEffector;
     bool canMove = true;
+    float playerScore = 0f;
 
     // Start is called before the first frame update
     void Start()
     {
         myRB2D = GetComponent<Rigidbody2D>();
-        surfaceEffector = FindObjectOfType<SurfaceEffector2D>();
+        surfaceEffector = FindFirstObjectByType<SurfaceEffector2D>();
     }
 
     // Update is called once per frame
@@ -27,6 +29,7 @@ public class PlayerController : MonoBehaviour
         {
             RotatePlayer();
             Boost();
+            UpdateScore();
         }
     }
 
@@ -54,8 +57,19 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void UpdateScore()
+    {
+        playerScore += scoreIncrement * Time.deltaTime;
+        Debug.Log("Score: " + playerScore);
+    }
+
     public void DisableControls()
     {
         canMove = false;
+    }
+
+    public float GetScore()
+    {
+        return playerScore;
     }
 }

@@ -15,7 +15,7 @@ public class CrashDetector : MonoBehaviour
         if(collision.tag == "Ground" && !hasCrashed)
         {
             hasCrashed = true;
-            FindObjectOfType<PlayerController>().DisableControls();
+            FindFirstObjectByType<PlayerController>().DisableControls();
             crashEffect.Play();
             GetComponent<AudioSource>().PlayOneShot(painfulDeathSFX[Random.Range(0,8)]);
             Invoke("ReloadScene", loadDelay);
