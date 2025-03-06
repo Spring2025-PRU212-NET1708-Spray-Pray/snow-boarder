@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] float torqueAmount = 4495f;
-    [SerializeField] float boostSpeed = 30f;
+    [SerializeField] float boostSpeed = 35f;
     [SerializeField] float baseSpeed = 20f;
     [SerializeField] float scoreIncrement = 1f; // Score increment per second
     [SerializeField] float rotationScoreIncrement = 10f; // Score increment for a full rotation
@@ -51,7 +51,7 @@ public class PlayerController : MonoBehaviour
 
     void Boost()
     {
-        if (Input.GetKey(KeyCode.UpArrow))
+        if (Input.GetKey(KeyCode.LeftShift))
         {
             surfaceEffector.speed = boostSpeed;
         }
