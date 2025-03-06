@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -7,6 +9,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float baseSpeed = 20f;
     [SerializeField] float scoreIncrement = 1f; // Score increment per second
     [SerializeField] float rotationScoreIncrement = 10f; // Score increment for a full rotation
+    [SerializeField] ScorePopup scorePopup; // Reference to the ScorePopup script
 
     Rigidbody2D myRB2D;
     SurfaceEffector2D surfaceEffector;
@@ -15,14 +18,17 @@ public class PlayerController : MonoBehaviour
     float previousRotation = 0f; // Track the previous rotation angle
     float totalRotation = 0f; // Track the total rotation
 
+    // Start is called before the first frame update
     void Start()
     {
         myRB2D = GetComponent<Rigidbody2D>();
         surfaceEffector = FindFirstObjectByType<SurfaceEffector2D>();
-        LoadHighScore();
-        previousRotation = transform.eulerAngles.z;
+        LoadHighScore(); // Load the score when the game starts
+        previousRotation = transform.eulerAngles.z; // Initialize previous rotation
+        ResetHighScore(); // Reset the high score for testing purposes
     }
 
+    // Update is called once per frame
     void Update()
     {
         if (canMove)
@@ -31,9 +37,6 @@ public class PlayerController : MonoBehaviour
             Boost();
             UpdateScore();
             CheckFullRotation();
-
-            // !!! only for developement
-            ResetHighScore();
         }
     }
 
@@ -64,7 +67,7 @@ public class PlayerController : MonoBehaviour
     public void UpdateScore()
     {
         playerScore += scoreIncrement * Time.deltaTime;
-        Debug.Log("Score: " + playerScore);
+        //Debug.Log("Score: " + playerScore);
     }
 
     void CheckFullRotation()
@@ -77,15 +80,32 @@ public class PlayerController : MonoBehaviour
         if (Mathf.Abs(totalRotation) >= 360f)
         {
             playerScore += rotationScoreIncrement;
-            totalRotation = 0f;
-            Debug.Log("Full Rotation! Score: " + playerScore);
+            totalRotation = 0f; // Reset the rotation counter
+            Debug.Log("Position: " + transform.position);
+            scorePopup.ShowScore((int)rotationScoreIncrement, transform.position); // Show the score popup next to the player
         }
     }
+
+    //void OnCollisionEnter2D(Collision2D collision)
+    //{
+    //    if (collision.gameObject.CompareTag("Rock"))
+    //    {
+    //        GameOver();
+    //    }
+    //}
+
+    //void GameOver()
+    //{
+    //    canMove = false;
+    //    SaveHighScore(); // Save the highest score when the game is over
+    //    Debug.Log("Game Over! Final Score: " + playerScore);
+    //    // Add additional game-over logic here (e.g., display game-over UI, restart the game, etc.)
+    //}
 
     public void DisableControls()
     {
         canMove = false;
-        SaveHighScore();
+        SaveHighScore(); // Save the highest score when controls are disabled
     }
 
     public float GetScore()
