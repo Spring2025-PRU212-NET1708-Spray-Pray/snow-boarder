@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-
     [SerializeField] float torqueAmount = 4495f;
     [SerializeField] float boostSpeed = 30f;
     [SerializeField] float baseSpeed = 20f;
@@ -20,6 +19,7 @@ public class PlayerController : MonoBehaviour
     {
         myRB2D = GetComponent<Rigidbody2D>();
         surfaceEffector = FindFirstObjectByType<SurfaceEffector2D>();
+        LoadHighScore(); // Load the score when the game starts
     }
 
     // Update is called once per frame
@@ -66,10 +66,26 @@ public class PlayerController : MonoBehaviour
     public void DisableControls()
     {
         canMove = false;
+        SaveHighScore(); // Save the highest score when controls are disabled
     }
 
     public float GetScore()
     {
         return playerScore;
+    }
+
+    public void SaveHighScore()
+    {
+        float highScore = PlayerPrefs.GetFloat("HighScore", 0f);
+        if (playerScore > highScore)
+        {
+            PlayerPrefs.SetFloat("HighScore", playerScore);
+            PlayerPrefs.Save();
+        }
+    }
+
+    public float LoadHighScore()
+    {
+        return PlayerPrefs.GetFloat("HighScore", 0f);
     }
 }

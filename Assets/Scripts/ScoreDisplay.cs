@@ -1,18 +1,18 @@
 ﻿using UnityEngine;
-using System.Collections;
-using UnityEngine.UI;
 using TMPro;
 
 namespace Assets.Scripts
 {
-	public class ScoreDisplay : MonoBehaviour
-	{
+    public class ScoreDisplay : MonoBehaviour
+    {
         [SerializeField] TextMeshProUGUI scoreText;
+        [SerializeField] TextMeshProUGUI highScoreText;
         PlayerController playerController;
 
         void Start()
         {
             playerController = FindFirstObjectByType<PlayerController>();
+            highScoreText.text = "High Score: " + playerController.LoadHighScore().ToString("0");
         }
 
         void Update()
