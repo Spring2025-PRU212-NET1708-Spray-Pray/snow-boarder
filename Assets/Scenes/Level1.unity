@@ -17722,6 +17722,7 @@ MonoBehaviour:
   boostSpeed: 30
   baseSpeed: 20
   scoreIncrement: 1
+  rotationScoreIncrement: 10
 --- !u!114 &755941736
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24426,7 +24427,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: aed87ea81cbde1e4584a3712541b3e3a, type: 3}
   m_Resource: {fileID: 8300000, guid: aed87ea81cbde1e4584a3712541b3e3a, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.1
   m_Pitch: 1
   Loop: 1
   Mute: 0
