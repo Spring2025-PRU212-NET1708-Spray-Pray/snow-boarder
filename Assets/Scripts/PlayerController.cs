@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour
         surfaceEffector = FindFirstObjectByType<SurfaceEffector2D>();
         LoadHighScore(); // Load the score when the game starts
         previousRotation = transform.eulerAngles.z; // Initialize previous rotation
-        ResetHighScore(); // Reset the high score for testing purposes
+        //ResetHighScore(); // Reset the high score for testing purposes
     }
 
     // Update is called once per frame

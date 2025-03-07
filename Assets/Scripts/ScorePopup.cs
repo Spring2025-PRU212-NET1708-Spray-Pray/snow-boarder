@@ -8,6 +8,8 @@ public class ScorePopup : MonoBehaviour
     //[SerializeField] float displayDuration = 1f; // Duration to display the popup
     [SerializeField] Vector3 offsetRange = new Vector3(1, 1, 0); // Range for random offset
     [SerializeField] float fadeDuration = 0.5f; // Duration for the fade-out animation
+    [SerializeField] AudioSource audioSource; // Reference to the AudioSource component
+    [SerializeField] AudioClip scoreSound; // Reference to the sound effect
 
     private void Start()
     {
@@ -22,8 +24,9 @@ public class ScorePopup : MonoBehaviour
             Random.Range(-offsetRange.y, offsetRange.y),
             0
         );
-        transform.position = position + randomOffset; 
+        transform.position = position + randomOffset;
         scoreText.gameObject.SetActive(true);
+        audioSource.PlayOneShot(scoreSound); // Play the sound effect
         StartCoroutine(FadeOut());
     }
 
@@ -44,4 +47,3 @@ public class ScorePopup : MonoBehaviour
         scoreText.color = originalColor; // Reset the color for the next use
     }
 }
-
