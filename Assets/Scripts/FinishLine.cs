@@ -11,11 +11,16 @@ public class FinishLine : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
+            PlayerController playerController = collision.GetComponent<PlayerController>();
+            if (playerController != null)
+            {
+                playerController.SaveHighScore();
+            }
+
             finishEffect.Play();
             GetComponent<AudioSource>().Play();
             Invoke("ReloadScene", loadDelay);
         }
-
     }
 
     void ReloadScene()
